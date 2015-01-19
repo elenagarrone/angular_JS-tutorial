@@ -3,15 +3,27 @@
   <head>
     <title>Angular JS tutorial</title>
   </head>
-  <body data-ng-init="customers=[{name:'Elena Garrone', city: 'London'}, {name:'Peter Juhasz', city: 'London'}, {name:'Susanna Arata', city: 'Genova'}]">
-    Name:
-    <br/>
-    <input type='text' data-ng-model="name"> {{ name }}
-    <br/>
-    <ul>
-      <li data-ng-repeat="cust in customers | filter: name | orderBy: 'city'">{{ cust.name | uppercase }} - {{ cust.city | lowercase}}</li>
-    </ul>
+  <body>
+    <section  data-ng-controller='SimpleController'>
+      Name:
+      <br/>
+      <input type='text' data-ng-model="name"> {{ name }}
+      <br/>
+      <ul>
+        <li data-ng-repeat="cust in customers | filter: name | orderBy: 'city'">{{ cust.name | uppercase }} - {{ cust.city | lowercase}}</li>
+      </ul>
+    </section>
 
     <script src='angular.min.js'></script>
+
+    <script>
+      function SimpleController($scope) {
+        $scope.customers = [
+        { name: 'Elena Garrone', city:'London' },
+        { name: 'Peter Juhasz', city:'New York' },
+        { name: 'Susanna Arata', city:'Genova' },
+        { name: 'Stefano Garrone', city:'Bandita' }]
+      }
+    </script>
   </body>
 </html>
