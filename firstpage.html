@@ -19,14 +19,17 @@
     <script>
       var demoApp = angular.module('demoApp', []); //the empty array means that there are no dependencies
 
-      demoApp.controller('SimpleController', function($scope) {
+      var controllers = {};
+      controllers.SimpleController = function ($scope) {
         $scope.customers = [
           { name: 'Elena Garrone', city:'London' },
           { name: 'Peter Juhasz', city:'New York' },
           { name: 'Susanna Arata', city:'Genova' },
           { name: 'Stefano Garrone', city:'Bandita' }
         ];
-      });
+      };
+
+      demoApp.controller(controllers);
     </script>
   </body>
 </html>
