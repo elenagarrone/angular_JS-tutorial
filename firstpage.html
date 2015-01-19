@@ -4,32 +4,49 @@
     <title>Angular JS tutorial</title>
   </head>
   <body>
-    <section  data-ng-controller='SimpleController'>
-      Name:
-      <br/>
-      <input type='text' data-ng-model="name"> {{ name }}
-      <br/>
-      <ul>
-        <li data-ng-repeat="cust in customers | filter: name | orderBy: 'city'">{{ cust.name | uppercase }} - {{ cust.city | lowercase}}</li>
-      </ul>
+    <section>
+      <article data-ng-view></article> <!--placeholder for the views-->
+
     </section>
 
-    <script src='angular.min.js'></script>
+    <script src='scripts/angular.min.js'></script>
+    <script src='scripts/angular-route.min.js'></script>
 
     <script>
-      var demoApp = angular.module('demoApp', []); //the empty array means that there are no dependencies
 
-      var controllers = {};
-      controllers.SimpleController = function ($scope) {
+    var demoApp = angular.module('demoApp', ['ngRoute']); //the empty array means that there are no dependencies
+
+    demoApp.config(['$routeProvider', function($routeProvider) {
+      $routeProvider
+      .when('/view1', {
+        controller: 'SimpleController',
+        templateUrl: 'partials/view1.html'
+      })
+      .when('/view2', {
+        controller: 'SimpleController',
+        templateUrl: 'partials/view2.html'
+      })
+      .otherwise({ redirectTo: '/view1'
+      });
+    }]);
+
+      demoApp.controller('SimpleController', function ($scope) {
         $scope.customers = [
           { name: 'Elena Garrone', city:'London' },
           { name: 'Peter Juhasz', city:'New York' },
           { name: 'Susanna Arata', city:'Genova' },
           { name: 'Stefano Garrone', city:'Bandita' }
         ];
-      };
 
-      demoApp.controller(controllers);
+        $scope.addCustomer = function() {
+          $scope.customers.push(
+            {
+              name: $scope.newCustomer.name,
+              city: $scope.newCustomer.city
+            }
+          )
+        };
+      });
     </script>
   </body>
 </html>
