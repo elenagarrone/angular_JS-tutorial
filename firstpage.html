@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app=''>
+<html data-ng-app='demoApp'>
   <head>
     <title>Angular JS tutorial</title>
   </head>
@@ -17,13 +17,16 @@
     <script src='angular.min.js'></script>
 
     <script>
-      function SimpleController($scope) {
+      var demoApp = angular.module('demoApp', []); //the empty array means that there are no dependencies
+
+      demoApp.controller('SimpleController', function($scope) {
         $scope.customers = [
-        { name: 'Elena Garrone', city:'London' },
-        { name: 'Peter Juhasz', city:'New York' },
-        { name: 'Susanna Arata', city:'Genova' },
-        { name: 'Stefano Garrone', city:'Bandita' }]
-      }
+          { name: 'Elena Garrone', city:'London' },
+          { name: 'Peter Juhasz', city:'New York' },
+          { name: 'Susanna Arata', city:'Genova' },
+          { name: 'Stefano Garrone', city:'Bandita' }
+        ];
+      });
     </script>
   </body>
 </html>
