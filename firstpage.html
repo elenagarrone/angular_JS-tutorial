@@ -3,13 +3,13 @@
   <head>
     <title>Angular JS tutorial</title>
   </head>
-  <body data-ng-init="names=['Elena Garrone', 'Peter Juhasz', 'Susanna Arata']">
+  <body data-ng-init="customers=[{name:'Elena Garrone', city: 'London'}, {name:'Peter Juhasz', city: 'London'}, {name:'Susanna Arata', city: 'Genova'}]">
     Name:
     <br/>
     <input type='text' data-ng-model="name"> {{ name }}
     <br/>
     <ul>
-      <li data-ng-repeat='personName in names'>{{ personName }}</li>
+      <li data-ng-repeat="cust in customers | filter: name | orderBy: 'city'">{{ cust.name | uppercase }} - {{ cust.city | lowercase}}</li>
     </ul>
 
     <script src='angular.min.js'></script>
