@@ -30,23 +30,43 @@
       });
     }]);
 
-      demoApp.controller('SimpleController', function ($scope) {
-        $scope.customers = [
-          { name: 'Elena Garrone', city:'London' },
-          { name: 'Peter Juhasz', city:'New York' },
-          { name: 'Susanna Arata', city:'Genova' },
-          { name: 'Stefano Garrone', city:'Bandita' }
-        ];
+    demoApp.factory('SimpleFactory', function() {
+      var customers = [
+        { name: 'Elena Garrone', city:'London' },
+        { name: 'Peter Juhasz', city:'New York' },
+        { name: 'Susanna Arata', city:'Genova' },
+        { name: 'Stefano Garrone', city:'Bandita' }
+      ];
 
-        $scope.addCustomer = function() {
-          $scope.customers.push(
-            {
-              name: $scope.newCustomer.name,
-              city: $scope.newCustomer.city
-            }
-          )
-        };
-      });
+      var factory = {};
+      factory.getCustomers = function(){
+        return customers;
+      };
+      factory.postCustomer = function(customer) {
+
+      };
+
+      return factory;
+    });
+
+    demoApp.controller('SimpleController', function ($scope, SimpleFactory) {
+      $scope.customers = [];
+      init();
+
+      function init() {
+        $scope.customers = SimpleFactory.getCustomers();
+      }
+
+      $scope.addCustomer = function() {
+        $scope.customers.push(
+          {
+            name: $scope.newCustomer.name,
+            city: $scope.newCustomer.city
+          }
+        )
+      };
+    });
+
     </script>
   </body>
 </html>
